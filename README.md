@@ -1,36 +1,144 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# En Su Presencia - Sistema de Contabilidad
 
-## Getting Started
+Aplicación web moderna para la gestión de ingresos y gastos de una iglesia, construida con Next.js, TypeScript y Tailwind CSS.
 
-First, run the development server:
+## Características
 
+- **Autenticación Segura**: Sistema de login con credenciales específicas
+- **Dashboard Interactivo**: Vista en tiempo real de ingresos, gastos y balances
+- **Registro de Cultos**: Formulario detallado para ofrendas y diezmos
+- **Control de Gastos**: Registro de egresos con método de pago
+- **Informes Semanales**: Análisis detallado por semanas del mes
+- **Diseño Responsivo**: Interfaz moderna que funciona en todos los dispositivos
+- **Base de Datos PostgreSQL**: Almacenamiento seguro y escalable
+
+## Requisitos
+
+- Node.js 18+
+- Cuenta de Vercel para despliegue
+- Base de datos PostgreSQL (Vercel Postgres recomendado)
+
+## Instalación
+
+1. Clonar el repositorio:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd ingresosygastosapp
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Instalar dependencias:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Configurar variables de entorno:
+```bash
+cp .env.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Editar `.env.local` con tus credenciales:
+```
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=tu-secreto-aqui
+DATABASE_URL=tu-url-de-base-de-datos
+```
 
-## Learn More
+4. Generar cliente Prisma:
+```bash
+npx prisma generate
+```
 
-To learn more about Next.js, take a look at the following resources:
+5. Crear tablas en la base de datos:
+```bash
+npx prisma db push
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+6. Crear usuario inicial:
+```bash
+npx tsx seed.ts
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+7. Iniciar desarrollo:
+```bash
+npm run dev
+```
 
-## Deploy on Vercel
+## Credenciales de Acceso
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Usuario**: En Su Presencia
+- **Contraseña**: S@porte777
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Funcionalidades
+
+### Dashboard Principal
+- Resumen de ingresos totales
+- Control de gastos
+- Balance neto
+- Caja física (efectivo real)
+
+### Registro de Cultos
+- Ofrendas: billetes, monedas, tarjeta
+- Diezmos: billetes, monedas, tarjeta
+- Selección de día (Jueves, Sábado, Domingo, Especial)
+
+### Control de Gastos
+- Descripción detallada
+- Monto y método de pago
+- Clasificación automática
+
+### Informes
+- Desglose semanal administrativo
+- Distribución de efectivo
+- Movimientos bancarios/tarjeta
+
+## Despliegue en Vercel
+
+1. Conectar repositorio a Vercel
+2. Configurar variables de entorno en Vercel
+3. Configurar Vercel Postgres (recomendado)
+4. Desplegar automáticamente
+
+## Estructura del Proyecto
+
+```
+src/
+├── app/
+│   ├── api/auth/[...nextauth]/    # Autenticación
+│   ├── dashboard/                 # Panel principal
+│   ├── login/                     # Página de login
+│   └── layout.tsx                 # Layout principal
+├── lib/
+│   ├── auth.ts                    # Configuración NextAuth
+│   └── prisma.ts                  # Cliente Prisma
+├── types/
+│   └── next-auth.d.ts             # Tipos NextAuth
+prisma/
+└── schema.prisma                  # Esquema de base de datos
+```
+
+## Tecnologías
+
+- **Frontend**: Next.js 14, React 18, TypeScript
+- **Estilos**: Tailwind CSS, Lucide React Icons
+- **Backend**: NextAuth.js, Prisma ORM
+- **Base de Datos**: PostgreSQL
+- **Despliegue**: Vercel
+
+## Notas
+
+- La aplicación está optimizada para Vercel
+- Usa Vercel Postgres como base de datos recomendada
+- El sistema de autenticación es seguro con bcrypt
+- Todos los datos se almacenan de forma persistente
+
+## Contribuciones
+
+1. Fork del proyecto
+2. Crear rama de características
+3. Hacer commit de cambios
+4. Push a la rama
+5. Abrir Pull Request
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT.

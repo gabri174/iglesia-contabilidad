@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  ingresos  Ingreso[]
+  gastos    Gasto[]
+  
+  @@map("users")
+}
+
+model Ingreso {
+  id          String   @id @default(cuid())
+  fecha       DateTime
+  dia         String
+  oBilletes   Float    @default(0)
+  oMonedas    Float    @default(0)
+  oTarjeta    Float    @default(0)
+  dBilletes   Float    @default(0)
+  dMonedas    Float    @default(0)
+  dTarjeta    Float    @default(0)
+  semana      Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("ingresos")
+}
+
+model Gasto {
+  id        String   @id @default(cuid())
+  fecha     DateTime
+  desc      String
+  monto     Float
+  metodo    String   // 'Efectivo' o 'Tarjeta'
+  semana    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("gastos")
+}
