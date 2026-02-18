@@ -62,12 +62,6 @@ npx tsx seed.ts
 ```bash
 npm run dev
 ```
-
-## Credenciales de Acceso
-
-- **Usuario**: En Su Presencia
-- **Contraseña**: S@porte777
-
 ## Funcionalidades
 
 ### Dashboard Principal
